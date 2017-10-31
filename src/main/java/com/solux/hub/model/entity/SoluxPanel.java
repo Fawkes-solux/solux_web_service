@@ -23,9 +23,8 @@ public class SoluxPanel {
     @Column(name = "power")
     private double power;
 
-    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "timestamp", updatable = false, insertable = false)
+    @Column(name = "timestamp")
     private Date timestamp;
 
     @ManyToOne(cascade = CascadeType.ALL)

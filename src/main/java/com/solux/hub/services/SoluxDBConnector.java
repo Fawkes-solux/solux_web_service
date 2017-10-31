@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.sql.*;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,9 +19,6 @@ import java.util.logging.Logger;
 public class SoluxDBConnector {
 
     private Logger logger = Logger.getLogger(SoluxDBConnector.class.getSimpleName());
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     public void insertHubData(HubSetupDTO setupDTO) {
 
@@ -45,6 +40,7 @@ public class SoluxDBConnector {
                 SoluxPanel soluxPanel = new SoluxPanel();
                 soluxPanel.setPanel_id(panelId);
                 soluxPanel.setSoluxHub(soluxHub);
+                soluxPanel.setTimestampType(new Date());
 
                 entitymanager.merge(soluxPanel);
             }
@@ -76,6 +72,7 @@ public class SoluxDBConnector {
                 panelInfo.setCurr(panel.getCurr());
                 panelInfo.setVolt(panel.getVolt());
                 panelInfo.setPower(panel.getCurr() * panel.getVolt());
+                panelInfo.setTimestampType(new Date());
 
                 entitymanager.merge(soluxHub);
 
