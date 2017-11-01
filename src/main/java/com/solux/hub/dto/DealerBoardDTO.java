@@ -120,10 +120,10 @@ public class DealerBoardDTO {
         private String location;
 
         @JsonProperty("lat")
-        private float lat;
+        private double lat;
 
         @JsonProperty("lng")
-        private float lng;
+        private double lng;
 
         @JsonProperty("capacity")
         private double capacity;
@@ -140,11 +140,11 @@ public class DealerBoardDTO {
             this.location = location;
         }
 
-        public void setLat(float lat) {
+        public void setLat(double lat) {
             this.lat = lat;
         }
 
-        public void setLng(float lng) {
+        public void setLng(double lng) {
             this.lng = lng;
         }
 
@@ -164,11 +164,11 @@ public class DealerBoardDTO {
             return location;
         }
 
-        public float getLat() {
+        public double getLat() {
             return lat;
         }
 
-        public float getLng() {
+        public double getLng() {
             return lng;
         }
 

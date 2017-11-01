@@ -17,7 +17,7 @@ public class SoluxCustomer {
     private String location;
 
     @Column(name = "capacity")
-    private float capacity;
+    private double capacity;
 
     @OneToOne
     @JoinColumn(name = "hub_id", nullable = false)
@@ -39,7 +39,7 @@ public class SoluxCustomer {
         this.location = location;
     }
 
-    public void setCapacity(float capacity) {
+    public void setCapacity(double capacity) {
         this.capacity = capacity;
     }
 
@@ -63,7 +63,7 @@ public class SoluxCustomer {
         return location;
     }
 
-    public float getCapacity() {
+    public double getCapacity() {
         return capacity;
     }
 

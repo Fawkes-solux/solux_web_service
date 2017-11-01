@@ -4,8 +4,10 @@ import com.solux.hub.dto.DealerBoardDTO;
 import com.solux.hub.dto.HubPingDTO;
 import com.solux.hub.dto.HubSetupDTO;
 import com.solux.hub.dto.ResponseDTO;
+import com.solux.hub.services.DealerHandler;
 import com.solux.hub.services.HubPingService;
 import com.solux.hub.services.HubSetupService;
+import com.solux.hub.services.SoluxDBConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +27,18 @@ public class SoluxHubController {
     @Autowired
     private HubPingService pingService;
 
+    @Autowired
+    private DealerHandler dealerHandler;
+
+    @Autowired
+    private SoluxDBConnector dbConnector;
+
     @RequestMapping(value = "/initiate/setup", method = RequestMethod.POST)
     public ResponseDTO initiateSetup(@RequestBody HubSetupDTO setupDTO) {
         Logger logger = Logger.getLogger(SoluxHubController.class.getSimpleName());
         logger.log(Level.INFO, " Received Request ");
 
         return setupService.buildResponse(setupDTO);
-
     }
 
     @RequestMapping(value = "/ping/service", method = RequestMethod.POST)
@@ -44,13 +51,14 @@ public class SoluxHubController {
 
     @RequestMapping(value = "/solux/dealerBoard", method = RequestMethod.GET)
     public DealerBoardDTO getDealerDetails(@RequestParam(value = "dealerId", defaultValue = "0") String dealerId) {
+
         Logger logger = Logger.getLogger(SoluxHubController.class.getSimpleName());
         logger.log(Level.INFO, " Received Request ");
 
-        return getDealerObjectDTO();
+        return dealerHandler.buildResponse(dealerId);
     }
 
-    private DealerBoardDTO getDealerObjectDTO() {
+    /*private DealerBoardDTO getDealerObjectDTO() {
         DealerBoardDTO dealerBoardDTO = new DealerBoardDTO();
         dealerBoardDTO.setErrorFlag(true);
         dealerBoardDTO.setErroMsg("qwerty");
@@ -87,5 +95,5 @@ public class SoluxHubController {
         dealerBoardDTO.setData(dealerData);
 
         return dealerBoardDTO;
-    }
+    }*/
 }
